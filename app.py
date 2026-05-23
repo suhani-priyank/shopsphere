@@ -15,16 +15,19 @@ def home():
 
     search = request.args.get('search')
 
-    # FETCH PRODUCTS FROM API
+    try:
+        response = requests.get(
+            'https://fakestoreapi.com/products',
+            timeout=10
+        )
 
-    response = requests.get(
-        'https://fakestoreapi.com/products'
-    )
+        products = response.json()
 
-    products = response.json()
+    except Exception as e:
+        print("API ERROR:", e)
+        products = []
 
     # SEARCH FILTER
-
     if search:
 
         filtered_products = []
@@ -41,7 +44,6 @@ def home():
         'index.html',
         products=products
     )
-
 # ADD TO CART
 
 @app.route('/add-to-cart/<int:id>')
