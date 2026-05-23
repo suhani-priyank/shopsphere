@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ShopSphere</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <h1>🛍 ShopSphere</h1>
+
+    <!-- SEARCH BAR -->
+
+    <form class="search-box" method="GET">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search products"
+        >
+
+    </form>
+
+    <a href="/cart">
+        Cart
+    </a>
+
+</nav>
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+    <h2>
+        Modern Shopping Experience
+    </h2>
+
+    <p>
+        Discover premium products with elegant design
+    </p>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<div class="products">
+
+{% if products %}
+
+    {% for product in products %}
+
+    <div class="card">
+
+        <img src="{{ product.image }}">
+
+        <h3>{{ product.title }}</h3>
+
+        <p class="category">
+            {{ product.category }}
+        </p>
+
+        <p class="rating">
+            ⭐⭐⭐⭐☆
+        </p>
+
+        <p class="price">
+            ₹{{ product.price }}
+        </p>
+
+        <a href="/add-to-cart/{{ product.id }}">
+            Add to Cart
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+    <h1 class="empty-cart">
+        No products found 😢
+    </h1>
+
+{% endif %}
+
+</div>
+
+</body>
+
+</html>
