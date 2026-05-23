@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 import requests
 
 app = Flask(__name__)
+app.secret_key = "shopsphere"
 
 # TEMP CART STORAGE
 
@@ -99,6 +100,5 @@ def success():
     return render_template('successful.html')
 
 # RUN APP
-
 if __name__ == "__main__":
     app.run(debug=True)
